@@ -1,4 +1,61 @@
-"""挂载到 /docs 的演示请求：重复条码、交叉候选、等价最优。"""
+"""挂载到 /docs 的演示请求：配对三组 + 运行批次分段两组。"""
+
+RUN_SEGMENT_EXAMPLES = {
+    "segment_0_of_2": {
+        "summary": "第 0 段（共 2 段）：3 条检测记录",
+        "description": (
+            "路径参数填 run_id=RUN-2026-0456、segment_index=0。"
+            "再选 segment_1_of_2 提交第 1 段，最后 POST /runs/RUN-2026-0456/publish 即可发布。"
+        ),
+        "value": {
+            "total_segments": 2,
+            "records": [
+                {
+                    "id": "R-001",
+                    "barcode": "BC-100",
+                    "timestamp": "2026-11-14T08:00:00Z",
+                    "results": {"GLU": 5.2, "K": 4.1},
+                },
+                {
+                    "id": "R-002",
+                    "barcode": "BC-101",
+                    "timestamp": "2026-11-14T08:00:12Z",
+                    "results": {"GLU": 6.0, "K": 3.9},
+                },
+                {
+                    "id": "R-003",
+                    "barcode": "BC-102",
+                    "timestamp": "2026-11-14T08:00:25Z",
+                    "results": {"GLU": 4.8, "K": 4.4},
+                },
+            ],
+        },
+    },
+    "segment_1_of_2": {
+        "summary": "第 1 段（共 2 段）：2 条检测记录",
+        "description": (
+            "路径参数填 run_id=RUN-2026-0456、segment_index=1。"
+            "两段齐了之后 POST /runs/RUN-2026-0456/publish 得到固定快照。"
+        ),
+        "value": {
+            "total_segments": 2,
+            "records": [
+                {
+                    "id": "R-004",
+                    "barcode": "BC-103",
+                    "timestamp": "2026-11-14T08:00:40Z",
+                    "results": {"GLU": 5.5, "K": 4.0},
+                },
+                {
+                    "id": "R-005",
+                    "barcode": "BC-104",
+                    "timestamp": "2026-11-14T08:00:51Z",
+                    "results": {"GLU": 5.9, "K": 4.2},
+                },
+            ],
+        },
+    },
+}
 
 DEMO_EXAMPLES = {
     "duplicate_barcodes": {

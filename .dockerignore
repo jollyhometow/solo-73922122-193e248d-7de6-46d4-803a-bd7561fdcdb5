@@ -8,3 +8,5 @@ conftest.py
 README.md
 docker-compose.yml
 .dockerignore
+data/
+.venv/
